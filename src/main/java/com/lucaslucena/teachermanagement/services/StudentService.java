@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+
 @Service
 public class StudentService {
 
@@ -23,6 +25,10 @@ public class StudentService {
         return studentDto;
     }
 
+    public List<StudentDto> findAllStudents() {
+        return repository.findAll().stream().map(studentModel -> new StudentDto(studentModel)).toList();
+    }
+
     public StudentDto findStudentById(Long id) {
         StudentModel studentModel = repository.findById(id).get();
 
@@ -32,7 +38,6 @@ public class StudentService {
         else {
             return new StudentDto(studentModel);
         }
-
     }
 
 
