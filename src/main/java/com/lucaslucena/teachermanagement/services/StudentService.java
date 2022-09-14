@@ -19,8 +19,11 @@ import java.util.List;
 @Service
 public class StudentService {
 
-    @Autowired
-    private StudentRepository repository;
+    private final StudentRepository repository;
+
+    public StudentService(StudentRepository repository) {
+        this.repository = repository;
+    }
 
     public StudentDto saveStudent(StudentModel studentModel) {
         StudentDto studentDto = new StudentDto(studentModel);
