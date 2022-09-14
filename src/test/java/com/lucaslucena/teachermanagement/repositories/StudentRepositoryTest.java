@@ -22,7 +22,7 @@ class StudentRepositoryTest {
     }
 
     @Test
-    void shouldFindOneStudentIfExistsAnyStudentWithOneSpecificEmail() {
+    void shouldReturnTrueWhenEmailExists() {
         List<StudentModel> students = new ArrayList<>(List.of(
                 new StudentModel("Lucas", "lucas.lucenak@gmail.com"),
                 new StudentModel("Daniel", "daniel@gmail.com")
@@ -35,7 +35,7 @@ class StudentRepositoryTest {
     }
 
     @Test
-    void shouldNotFindOneStudentIfExistsAnyStudentWithOneSpecificEmail() {
+    void shouldReturnFalseWhenEmailDoesNotExists() {
         List<StudentModel> students = new ArrayList<>(List.of(
                 new StudentModel("Lucas", "lucas.lucenak@gmail.com"),
                 new StudentModel("Daniel", "daniel@gmail.com")
