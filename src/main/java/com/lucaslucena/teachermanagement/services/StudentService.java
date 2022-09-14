@@ -1,12 +1,15 @@
 package com.lucaslucena.teachermanagement.services;
 
 import com.lucaslucena.teachermanagement.dto.StudentDto;
+import com.lucaslucena.teachermanagement.exceptions.DatabaseException;
 import com.lucaslucena.teachermanagement.exceptions.StudentNotFoundException;
 import com.lucaslucena.teachermanagement.models.StudentModel;
 import com.lucaslucena.teachermanagement.repositories.StudentRepository;
 import org.apache.coyote.Response;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -40,5 +43,13 @@ public class StudentService {
         }
     }
 
-
+    public void deleteStudentById(Long id) {
+        try {
+            repository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new StudentNotFoundException("Student not found. Id: " + id);
+        } catch (DataIntegrityViolationException e) {
+            throw new DatabaseException("Database violation");
+        }
+    }
 }
