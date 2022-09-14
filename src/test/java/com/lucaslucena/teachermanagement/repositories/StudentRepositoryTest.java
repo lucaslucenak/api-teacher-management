@@ -1,10 +1,7 @@
 package com.lucaslucena.teachermanagement.repositories;
 
 import com.lucaslucena.teachermanagement.models.StudentModel;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
@@ -19,11 +16,43 @@ class StudentRepositoryTest {
     @Autowired
     private StudentRepository repository;
 
+    @AfterEach
+    void tearDown() {
+        repository.deleteAll();
+    }
+
+    @Test
+    void shouldFindOneStudentIfExistsAnyStudentWithOneSpecificEmail() {
+        List<StudentModel> students = new ArrayList<>(List.of(
+                new StudentModel("Lucas", "lucas.lucenak@gmail.com"),
+                new StudentModel("Daniel", "daniel@gmail.com")
+
+        ));
+        repository.saveAll(students);
+        String email = "lucas.lucenak@gmail.com";
+        Assertions.assertEquals(true, repository.selectExistsByEmail(email));
+
+    }
+
+    @Test
+    void shouldNotFindOneStudentIfExistsAnyStudentWithOneSpecificEmail() {
+        List<StudentModel> students = new ArrayList<>(List.of(
+                new StudentModel("Lucas", "lucas.lucenak@gmail.com"),
+                new StudentModel("Daniel", "daniel@gmail.com")
+
+        ));
+        repository.saveAll(students);
+
+        String email = "felipe@gmail.com";
+        Assertions.assertEquals(false, repository.selectExistsByEmail(email));
+
+    }
+
     @Test
     void shouldFindAllStudents() {
         List<StudentModel> students = new ArrayList<>(List.of(
-                new StudentModel("Lucas"),
-                new StudentModel("Daniel")
+                new StudentModel("Lucas", "lucas.lucenak@gmail.com"),
+                new StudentModel("Daniel", "daniel@gmail.com")
 
         ));
 
@@ -40,8 +69,8 @@ class StudentRepositoryTest {
     @Test
     void shouldFindStudentById() {
 
-        StudentModel student1 = new StudentModel("Lucas");
-        StudentModel student2 = new StudentModel("Daniel");
+        StudentModel student1 = new StudentModel("Lucas", "lucas.lucenak@gmail.com");
+        StudentModel student2 = new StudentModel("Daniel", "daniel@gmail.com");
         List<StudentModel> students = new ArrayList<>(List.of(student1, student2));
 
         repository.saveAll(students);

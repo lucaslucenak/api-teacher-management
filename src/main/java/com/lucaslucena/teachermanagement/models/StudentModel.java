@@ -21,7 +21,11 @@ public class StudentModel {
     @Column
     private String name;
 
-    public StudentModel(String name) {
+    @Column
+    private String email;
+
+    public StudentModel(String name, String email) {
         this.name = name;
+        this.email = email;
     }
 }
