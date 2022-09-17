@@ -26,7 +26,6 @@ class StudentRepositoryTest {
         List<StudentModel> students = new ArrayList<>(List.of(
                 new StudentModel("Lucas", "lucas.lucenak@gmail.com"),
                 new StudentModel("Daniel", "daniel@gmail.com")
-
         ));
         repository.saveAll(students);
         String email = "lucas.lucenak@gmail.com";
@@ -39,7 +38,6 @@ class StudentRepositoryTest {
         List<StudentModel> students = new ArrayList<>(List.of(
                 new StudentModel("Lucas", "lucas.lucenak@gmail.com"),
                 new StudentModel("Daniel", "daniel@gmail.com")
-
         ));
         repository.saveAll(students);
 
