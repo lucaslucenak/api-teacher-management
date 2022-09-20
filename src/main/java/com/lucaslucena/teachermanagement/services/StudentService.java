@@ -34,16 +34,22 @@ public class StudentService {
         return repository.findAll().stream().map(studentModel -> new StudentDto(studentModel)).toList();
     }
 
-
-    public StudentDto findStudentById(Long id) {
+    public StudentModel findStudentById(Long id) {
         StudentModel studentModel = repository.findById(id).get();
 
         if (repository.findById(id).isEmpty()) {
             throw new StudentNotFoundException("Student not found");
         }
         else {
-            return new StudentDto(studentModel);
+            return studentModel;
         }
+    }
+
+    public StudentModel updateStudentById(Long id, StudentModel studentModel) {
+        StudentModel sourceStudent = findStudentById(id);
+        sourceStudent.setName(studentModel.getName());
+        sourceStudent.setEmail(studentModel.getEmail());
+        return repository.save(sourceStudent);
     }
 
     public void deleteStudentById(Long id) {
