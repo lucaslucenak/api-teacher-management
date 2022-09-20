@@ -1,8 +1,11 @@
 package com.lucaslucena.teachermanagement.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serial;
+import java.io.Serializable;
 
 @Entity
 @Getter
@@ -10,7 +13,10 @@ import javax.persistence.*;
 @Table(name = "tb_student")
 @AllArgsConstructor
 @NoArgsConstructor
-public class StudentModel {
+public class StudentModel implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     @Id
 //    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "student_id_generator")

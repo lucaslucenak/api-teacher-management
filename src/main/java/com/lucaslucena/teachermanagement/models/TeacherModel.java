@@ -13,8 +13,9 @@ import javax.persistence.*;
 public class TeacherModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "teacher_id_generator")
-    @SequenceGenerator(name="teacher_id_generator", sequenceName = "teacher_id_sequence", allocationSize=50)
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "student_id_generator")
+//    @SequenceGenerator(name="student_id_generator", sequenceName = "student_id_sequence", allocationSize=50)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column

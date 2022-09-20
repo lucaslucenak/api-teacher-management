@@ -12,7 +12,8 @@ import javax.persistence.*;
 public class ProjectModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "project_id_generator")
-    @SequenceGenerator(name="project_id_generator", sequenceName = "project_id_sequence", allocationSize=50)
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "student_id_generator")
+//    @SequenceGenerator(name="student_id_generator", sequenceName = "student_id_sequence", allocationSize=50)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 }

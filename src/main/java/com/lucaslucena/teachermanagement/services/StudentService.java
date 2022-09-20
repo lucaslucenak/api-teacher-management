@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -25,15 +26,14 @@ public class StudentService {
         this.repository = repository;
     }
 
-    public StudentDto saveStudent(StudentModel studentModel) {
-        StudentDto studentDto = new StudentDto(studentModel);
-        repository.save(studentModel);
-        return studentDto;
+    public StudentModel saveStudent(StudentModel studentModel) {
+        return repository.save(studentModel);
     }
 
     public List<StudentDto> findAllStudents() {
         return repository.findAll().stream().map(studentModel -> new StudentDto(studentModel)).toList();
     }
+
 
     public StudentDto findStudentById(Long id) {
         StudentModel studentModel = repository.findById(id).get();
